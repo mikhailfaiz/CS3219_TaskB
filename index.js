@@ -4,6 +4,7 @@ let apiRoutes = require("./api-routes");
 let mongoose = require('mongoose');
 let cors = require("cors");
 let bodyParser = require('body-parser');
+require('dotenv').config();
 
 // Setup server port
 const port = process.env.PORT || 8080;
@@ -18,7 +19,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://mikhailfaiz:21appleS@cluster0.qad64.mongodb.net/<dbname>?retryWrites=true&w=majority";
+const uri = process.env.DB_URI;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 client.connect(err => {
   const collection = client.db("test").collection("devices");
